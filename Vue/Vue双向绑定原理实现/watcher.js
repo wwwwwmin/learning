@@ -12,9 +12,9 @@ class Watcher {
         this.value = this.get();
     }
     get() {
-        Dep.target = this;
-        let value = this.vm.data[this.exp];
-        Dep.target = null;
+        Dep.target = this;    //缓存自己
+        let value = this.vm.data[this.exp]; //触发dep中的depend()
+        Dep.target = null;   //释放自己，避免再次被push到dep.subs中
         return value;
     }
 
